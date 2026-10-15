@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO & Social Sharing -->
+  <link rel="icon" type="image/png" href="image.png" />
+  <link rel="apple-touch-icon" href="image.png" />
+  <title>Chat with AI - aynabyayush</title>
+  <meta name="title" content="Chat with AI - aynabyayush" />
+  <meta name="description" content="Chat live with Ayna, your personal AI assistant by Ayush Narayan." />
+  <meta name="author" content="Ayush Narayan" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NML1VPNDPH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NML1VPNDPH');
+  </script>
+
+  <!-- Google Fonts: Inter and Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- OpenSpline Chat Embed Script -->
+  <script src="https://dashboard.openspline.dev/embed.js" defer></script>
+
+  <style>
+    /* ==========================================================
+       GLOBAL PAGE STYLING (Light Theme)
+       ========================================================== */
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Standard Navigation */
+    header {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      background: rgba(248, 250, 252, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 50;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+    .logo span {
+      color: var(--accent);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 3rem 0 2rem;
+      text-align: center;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      color: #4f46e5;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+    .status-badge span {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 span {
+      color: var(--accent);
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================
+       CYBER CHAT TILE (Light Theme Adapted)
+       ========================================================== */
+    .cyber-tile {
+      --ftp-cyan: #0284c7;
+      --ftp-cyan-glow: rgba(2, 132, 199, 0.15);
+      --ftp-purple: #7c3aed;
+      --ftp-pink: #db2777;
+      --ftp-dark-bg: #f8fafc;
+      --ftp-card-surface: #ffffff;
+      --ftp-border: rgba(99, 102, 241, 0.2);
+
+      font-family: 'Orbitron', monospace, sans-serif !important;
+      position: relative;
+      background: var(--ftp-card-surface);
+      border: 1px solid var(--ftp-border);
+      border-radius: 16px;
+      padding: 2rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 0 15px rgba(99, 102, 241, 0.02);
+      margin-top: 1.5rem;
+    }
+
+    /* Ambient Scanner Line Overlay */
+    .cyber-tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--ftp-cyan), var(--ftp-purple), var(--ftp-pink), transparent);
+    }
+
+    .cyber-tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cyber-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .cyber-app-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(124, 58, 237, 0.15));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+    }
+
+    .cyber-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #0f172a;
+      text-transform: uppercase;
+    }
+
+    .cyber-title span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--ftp-purple) 60%, var(--ftp-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cyber-sub {
+      font-size: 0.75rem;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .cyber-hud-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #047857;
+    }
+
+    .cyber-hud-badge .pulse-node {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* ==========================================================
+       ADAPTIVE AI AGENT FRAME
+       ========================================================== */
+    .chat-wrapper {
+      --chat-zoom: 1.38;
+      --chat-offset-y: 0%;
+
+      position: relative;
+      background: #f1f5f9;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 680px;
+
+      height: 600px;
+      min-height: 480px;
+      transition: height 0.25s ease-in-out;
+
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), inset 0 0 10px rgba(0, 0, 0, 0.02);
+      clip-path: inset(0 round 12px);
+    }
+
+    openspline-cloud {
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      background: transparent !important;
+      transform: translate(-50%, calc(-50% + var(--chat-offset-y))) scale(var(--chat-zoom)) !important;
+      transform-origin: center center !important;
+      border: none !important;
+    }
+
+    openspline-cloud > *,
+    openspline-cloud iframe {
+      width: 100% !important;
+      height: 100% !important;
+      border: none !important;
+      background: transparent !important;
+      display: block !important;
+    }
+
+    @media (max-width: 640px) {
+      .cyber-tile {
+        padding: 1.25rem;
+      }
+      .chat-wrapper {
+        --chat-zoom: 1.25;
+        height: 520px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 2rem;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .social-links a {
+      color: var(--text-muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">AYNAby<span>Ayush</span></a>
+        <ul class="nav-links">
+          <li><a href="https://aynabyayush.github.io/">Home</a></li>
+          <li><a href="index.html" class="active">Chat with AI</a></li>
+          <li><a href="https://github.com/aynabyayush" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="status-badge">
+        <span></span> AI ASSISTANT ONLINE
+      </div>
+      <h1>
+        Interact With <span>Ayna AI</span>
+      </h1>
+      <p>
+        Ask questions, explore development ideas, or query insights about my projects directly through this interactive intelligent neural interface.
+      </p>
+    </section>
+
+    <!-- Cyber-Themed Chat Container Tile -->
+    <div class="cyber-tile">
+      <div class="cyber-tile-header">
+        <div class="cyber-brand">
+          <div class="cyber-app-icon">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div>
+            <div class="cyber-title">Ayna <span>Neural Chat</span></div>
+            <div class="cyber-sub">openspline.dev // hemant@openspline.dev</div>
+          </div>
+        </div>
+        <div class="cyber-hud-badge">
+          <span class="pulse-node"></span> SECURE PIPELINE
+        </div>
+      </div>
+
+      <!-- Embedded Chat Interface Container -->
+      <div class="chat-wrapper" id="chatWrapper">
+        <openspline-cloud
+          cloud-url="https://dashboard.openspline.dev"
+          path="ayna-by-ayush"
+          theme="light">
+        </openspline-cloud>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/aynabyayush" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:ayush.narayan07@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+      <p>&copy; <span id="year"></span> Ayush Narayan &bull; Hosted on GitHub</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function optimizeOpenSplineEmbed() {
+      const embedHost = document.querySelector('openspline-cloud');
+      const chatWrapper = document.getElementById('chatWrapper');
+      if (!embedHost || !chatWrapper) return;
+
+      const applyFixes = (root) => {
+        if (!root) return;
+
+        if (root instanceof ShadowRoot && !root.querySelector('#cyber-embed-override')) {
+          const style = document.createElement('style');
+          style.id = 'cyber-embed-override';
+          style.textContent = `
+            :host, *, div, main, section, iframe {
+              background-color: transparent !important;
+              background: transparent !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              border: none !important;
+            }
+            iframe {
+              width: 100% !important;
+              height: 100% !important;
+              display: block !important;
+            }
+          `;
+          root.appendChild(style);
+        }
+
+        root.querySelectorAll('iframe, div').forEach((el) => {
+          el.style.setProperty('background', 'transparent', 'important');
+          el.style.setProperty('background-color', 'transparent', 'important');
+          if (el.tagName.toLowerCase() === 'iframe') {
+            el.setAttribute('allowtransparency', 'true');
+            el.style.setProperty('width', '100%', 'important');
+            el.style.setProperty('height', '100%', 'important');
+            el.style.setProperty('border', 'none', 'important');
+          }
+        });
+      };
+
+      applyFixes(embedHost);
+      if (embedHost.shadowRoot) {
+        applyFixes(embedHost.shadowRoot);
+      }
+
+      const observer = new MutationObserver(() => {
+        applyFixes(embedHost);
+        if (embedHost.shadowRoot) {
+          applyFixes(embedHost.shadowRoot);
+        }
+      });
+
+      observer.observe(embedHost, { childList: true, subtree: true });
+      if (embedHost.shadowRoot) {
+        observer.observe(embedHost.shadowRoot, { childList: true, subtree: true });
+      }
+    }
+
+    window.addEventListener('message', (event) => {
+      try {
+        const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+        if (data && (data.height || data.type === 'resize')) {
+          const newHeight = data.height || data.value;
+          if (newHeight && typeof newHeight === 'number') {
+            const chatWrapper = document.getElementById('chatWrapper');
+            if (chatWrapper) {
+              chatWrapper.style.height = `${Math.max(480, newHeight)}px`;
+            }
+          }
+        }
+      } catch (e) {}
+    });
+
+    window.addEventListener('DOMContentLoaded', optimizeOpenSplineEmbed);
+    window.addEventListener('load', optimizeOpenSplineEmbed);
+  </script>
+</body>
+</html>
