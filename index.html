@@ -33,16 +33,26 @@
 
   <style>
     /* ==========================================================
-       DEATH NOTE PARCHMENT / "HOW TO USE" LIGHT THEME
-       ========================================================== */
+        DEATH NOTE THEMES (LIGHT & DARK MODE)
+        ========================================================== */
     :root {
-      --bg-color: #f3efe6;          /* Aged parchment paper */
-      --card-bg: #faf7f0;           /* Crisp notebook page */
+      --bg-color: #f3efe6;         /* Aged parchment paper */
+      --card-bg: #faf7f0;            /* Crisp notebook page */
       --card-border: #d4ccb8;
-      --text-main: #1c1815;         /* Deep fountain pen ink */
-      --text-muted: #5e574c;        /* Faded sepia text */
-      --accent-crimson: #8b0000;    /* Shinigami blood red */
+      --text-main: #1c1815;          /* Deep fountain pen ink */
+      --text-muted: #5e574c;         /* Faded sepia text */
+      --accent-crimson: #8b0000;     /* Shinigami blood red */
       --ink-black: #12100e;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #12100e;         /* Dark ink / abyss */
+      --card-bg: #1a1715;            /* Dark notebook page */
+      --card-border: #383029;
+      --text-main: #e6dfd5;          /* Pale parchment text */
+      --text-muted: #a39888;         /* Muted pale text */
+      --accent-crimson: #c41e3a;     /* Bright Shinigami blood red */
+      --ink-black: #f5f0eb;
     }
 
     * {
@@ -62,6 +72,13 @@
       padding-bottom: 3.5rem;
       position: relative;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="dark"] body {
+      background-image:
+        radial-gradient(circle at 50% 10%, rgba(30, 25, 20, 0.8) 0%, rgba(10, 8, 6, 0.95) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(196, 30, 58, 0.06) 28px);
     }
 
     .container {
@@ -76,12 +93,18 @@
     header {
       padding: 1.15rem 0;
       border-bottom: 2px solid var(--accent-crimson);
-      background: rgba(243, 239, 230, 0.95);
+      background: var(--bg-color);
       backdrop-filter: blur(8px);
       box-shadow: 0 4px 18px rgba(35, 25, 15, 0.06);
       position: sticky;
       top: 0;
       z-index: 50;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] header {
+      background: rgba(18, 16, 14, 0.95);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
     }
 
     nav {
@@ -113,7 +136,7 @@
 
     .nav-links {
       display: flex;
-      gap: 1.75rem;
+      gap: 1.5rem;
       list-style: none;
       align-items: center;
     }
@@ -132,14 +155,37 @@
       color: var(--accent-crimson);
     }
 
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      background: rgba(139, 0, 0, 0.08);
+      border: 1px solid var(--accent-crimson);
+      color: var(--accent-crimson);
+      width: 38px;
+      height: 38px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.05rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(139, 0, 0, 0.1);
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--accent-crimson);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
     /* ==========================================================
-       SIDE-BY-SIDE RESPONSIVE GRID
-       ========================================================== */
+        SIDE-BY-SIDE RESPONSIVE GRID
+        ========================================================== */
     .content-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3.5rem;
-      align-items: center; /* Side-by-side vertical alignment on desktop */
+      align-items: center;
       padding: 2.5rem 0 1.5rem;
     }
 
@@ -169,6 +215,11 @@
       font-weight: 700;
       letter-spacing: 1.2px;
       margin-bottom: 1.25rem;
+    }
+
+    [data-theme="dark"] .status-badge {
+      background: rgba(196, 30, 58, 0.12);
+      border-color: rgba(196, 30, 58, 0.4);
     }
 
     .status-badge span {
@@ -223,6 +274,11 @@
       border-radius: 4px;
       box-shadow: 0 3px 10px rgba(50, 40, 30, 0.04);
       transition: all 0.2s ease;
+    }
+
+    [data-theme="dark"] .feature-item {
+      background: #181513;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     }
 
     .feature-item:hover {
@@ -284,15 +340,20 @@
     }
 
     .prompt-chip {
-      background: #ffffff;
+      background: var(--card-bg);
       border: 1px dashed rgba(139, 0, 0, 0.45);
-      color: var(--ink-black);
+      color: var(--text-main);
       font-family: 'Special Elite', monospace;
       font-size: 0.78rem;
       padding: 0.4rem 0.75rem;
       border-radius: 3px;
       cursor: pointer;
       transition: all 0.2s ease;
+    }
+
+    [data-theme="dark"] .prompt-chip {
+      background: #1e1a17;
+      border-color: rgba(196, 30, 58, 0.5);
     }
 
     .prompt-chip:hover {
@@ -327,17 +388,16 @@
     }
 
     /* ==========================================================
-       RYUK STAGE (RYUK ENTIRELY BEHIND THE TILE)
-       ========================================================== */
+        RYUK STAGE
+        ========================================================== */
     .ryuk-stage {
       position: relative;
       width: 100%;
       max-width: 470px;
       margin: 0 auto;
-      padding-top: 155px; /* Room for Ryuk's head & shoulders above the card */
+      padding-top: 155px;
     }
 
-    /* Ryuk Body Behind Card */
     .ryuk-body-under {
       position: absolute;
       top: -45px;
@@ -346,7 +406,7 @@
       width: 540px;
       max-width: none;
       height: auto;
-      z-index: 1; /* Strictly behind the tile */
+      z-index: 1;
       pointer-events: none;
       filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4));
       animation: ryukHover 5s ease-in-out infinite;
@@ -359,13 +419,13 @@
     }
 
     /* ==========================================================
-       DEATH NOTE CHAT TILE (SITS IN FRONT)
-       ========================================================== */
+        DEATH NOTE CHAT TILE
+        ========================================================== */
     .cyber-tile {
       position: relative;
-      z-index: 3; /* Elevated above Ryuk */
-      background: #fdfbf7;
-      border: 2px solid #282421;
+      z-index: 3;
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
       border-radius: 6px;
       padding: 1.25rem;
       box-shadow:
@@ -375,6 +435,15 @@
       width: 100%;
       display: flex;
       flex-direction: column;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    [data-theme="dark"] .cyber-tile {
+      background: #1a1715;
+      border-color: #383029;
+      box-shadow:
+        0 14px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(196, 30, 58, 0.25);
     }
 
     .cyber-tile::before {
@@ -408,7 +477,7 @@
       width: 38px;
       height: 38px;
       border-radius: 4px;
-      background: #ffffff;
+      background: var(--card-bg);
       border: 1.5px solid var(--accent-crimson);
       display: flex;
       align-items: center;
@@ -417,6 +486,10 @@
       color: var(--accent-crimson);
       box-shadow: 0 2px 6px rgba(139, 0, 0, 0.15);
       flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .cyber-app-icon {
+      background: #12100e;
     }
 
     .cyber-title {
@@ -473,7 +546,7 @@
     /* Embedded Chat Wrapper */
     .chat-wrapper {
       position: relative;
-      background: #ffffff;
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 4px;
       width: 100%;
@@ -486,6 +559,11 @@
       justify-content: center;
       overflow: hidden;
       box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] .chat-wrapper {
+      background: #161311;
     }
 
     openspline-cloud {
@@ -561,6 +639,11 @@
         <ul class="nav-links">
           <li><a href="https://aynabyayush.github.io/">Home</a></li>
           <li><a href="https://github.com/aynabyayush" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a></li>
+          <li>
+            <button class="theme-toggle-btn" id="themeToggle" type="button" title="Toggle Dark/Light Mode">
+              <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -687,6 +770,34 @@
         navigator.clipboard.writeText(text);
       }
     }
+
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const opensplineCloud = document.querySelector('openspline-cloud');
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.className = 'fa-solid fa-sun';
+        if (opensplineCloud) opensplineCloud.setAttribute('theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeIcon.className = 'fa-solid fa-moon';
+        if (opensplineCloud) opensplineCloud.setAttribute('theme', 'light');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // Initialize theme based on local storage or system preference
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
 
     // Auto-sizing listener if OpenSpline posts dimension updates
     window.addEventListener('message', (event) => {
